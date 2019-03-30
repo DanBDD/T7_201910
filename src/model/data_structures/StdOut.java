@@ -7,7 +7,7 @@ package model.data_structures;
  *  Writes data of various types to standard output.
  *
  ******************************************************************************/
-
+//CÓDIGO TOMADO DEL LIBRO Algorithms 4th Edition de Sedgewick y Wayne
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;

@@ -12,9 +12,6 @@ import java.util.Date;
  */
 public class VOMovingViolations implements Comparable<VOMovingViolations>{
 
-	/**
-	 * Atributo que da el identificador de la ubicacion de la infraccion.
-	 */
 	private int addressID;
 	
 	private String streetSegId;
@@ -23,16 +20,10 @@ public class VOMovingViolations implements Comparable<VOMovingViolations>{
 	
 	private int yCoord;
 
-	/**
-	 * Atributo que da la fecha de la infracci�n
-	 */
 	private String ticketIssueDate;
 
-	/**
-	 * Atributo que da la localizacion de la infraccion
-	 */
 	private String location;
-	private int id;
+
 	
 	/**
 	 * Constructor VOMovingViolations
@@ -41,8 +32,7 @@ public class VOMovingViolations implements Comparable<VOMovingViolations>{
 	 * @param pAddress direccion de la infracci�n
 
 	 */
-	public VOMovingViolations(int Oid,String pIssueDate, int pAddress, String pLocation, String streetId, int x, int y){
-		id=Oid;
+	public VOMovingViolations(String pIssueDate, int pAddress, String pLocation, String streetId, int x, int y){
 		location = pLocation;
 		addressID = pAddress;
 		ticketIssueDate = pIssueDate;

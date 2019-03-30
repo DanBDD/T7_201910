@@ -6,6 +6,7 @@
  *  Reads in data of various types from standard input.
  *
  ******************************************************************************/
+//CÓDIGO TOMADO DEL LIBRO Algorithms 4th Edition de Sedgewick y Wayne
 package model.data_structures;
 
 import java.util.ArrayList;

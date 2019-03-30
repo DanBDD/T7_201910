@@ -10,14 +10,13 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import model.data_structures.ArregloDinamico;
 import model.data_structures.Comparaciones;
+import model.data_structures.RedBlackBST;
 import model.util.Sort;
+import model.vo.ObjectID;
 import model.vo.VOMovingViolations;
 import view.MovingViolationsManagerView;
 
@@ -51,21 +50,16 @@ public class Controller {
 
 	public static final String rutaJunio = "./data/Moving_Violations_Issued_in_June_2018.json";
 
-
-	private ArregloDinamico<VOMovingViolations> arreglo;
-
+	private RedBlackBST<ObjectID, VOMovingViolations> arbol;
+	
 	public Controller() {
 		view = new MovingViolationsManagerView();
-		arreglo=new ArregloDinamico<VOMovingViolations>(160000);
+		arbol = new RedBlackBST<ObjectID, VOMovingViolations>();
 	}
 
 	public void run() {
 		Scanner sc = new Scanner(System.in);
 		boolean fin=false;
-		int nMuestra = 0;
-		long startTime = 0;
-		long endTime = 0;
-		long duration = 0;
 		int nDatos = 0;
 		while(!fin)
 		{
@@ -79,120 +73,14 @@ public class Controller {
 				nDatos = this.loadMovingViolations();
 				view.printMessage("Datos cargados, total de datos: " + nDatos);
 				break;
-				//			case 1:
-				//				view.printMessage("Dar tamaNo de la muestra: ");
-				//				nMuestra = sc.nextInt();
-				//				muestra = this.generarMuestra( nMuestra );
-				//				int tam = muestra.length;
-				//				view.printMessage("Muestra generada, tamano: " + tam);
-				//				break;
-				//			case 2: 
-				//				if ( nMuestra > 0 && muestra != null)
-				//				{    
-				//					view.printDatosMuestra( nMuestra, muestra);
-				//				}
-				//				else
-				//				{
-				//					view.printMessage("Muestra invalida");
-				//				}
-				//				break;
-				//			case 3:
-				//				if ( nMuestra > 0 && muestra != null)
-				//				{
-				//					copia = this.obtenerCopia(muestra);
-				//					startTime = System.currentTimeMillis();
-				//					this.agregarColaPrioridad(copia);
-				//					endTime = System.currentTimeMillis();
-				//					duration = endTime - startTime;
-				//					view.printMessage("Agregar terminado con Cola de Prioridad.");
-				//					view.printMessage("Tiempo en agregar con Cola de Prioridad: " + duration + " milisegundos");
-				//
-				//				}
-				//				else
-				//				{
-				//					view.printMessage("Muestra invalida");
-				//				}
-				//				break;
-				//
-				//			case 4:
-				//				if ( nMuestra > 0 && muestra != null  )
-				//				{
-				//					copia = this.obtenerCopia(muestra);
-				//					startTime = System.currentTimeMillis();
-				//					this.agregarMaxHeap(copia);
-				//					endTime = System.currentTimeMillis();
-				//					duration = endTime - startTime;
-				//					view.printMessage("Agregar terminado con HeapMAX.");
-				//					view.printMessage("Tiempo en agregar con HeapMAX: " + duration + " milisegundos");
-				//				}
-				//				else
-				//				{
-				//					view.printMessage("Muestra invalida");
-				//				}
-				//				break;
-				//			case 5:
-				//				if ( nMuestra > 0 && muestra != null && cola.darNumElementos() > 0 )
-				//				{					
-				//					copia = this.obtenerCopia(muestra);
-				//					startTime = System.currentTimeMillis();
-				//					this.borrarMaxCola(copia);
-				//					endTime = System.currentTimeMillis();
-				//					duration = endTime - startTime;
-				//					view.printMessage("Eliminar m�ximo terminado con Cola de Prioridad.");
-				//					view.printMessage("Tiempo en eliminar m�ximo con Cola de Prioridad: " + duration + " milisegundos");
-				//				}
-				//				else
-				//				{
-				//					view.printMessage("Muestra invalida");
-				//				}
-				//				break;
-				//
-				//			case 6:
-				//				if ( nMuestra > 0 && muestra != null && heap.darNumElementos() > 0)
-				//				{
-				//					copia = this.obtenerCopia(muestra);
-				//					startTime = System.currentTimeMillis();
-				//					this.borrarMaxHeap(copia);
-				//					endTime = System.currentTimeMillis();
-				//					duration = endTime - startTime;
-				//					view.printMessage("Eliminar m�ximo terminado con HeapMAX.");
-				//					view.printMessage("Tiempo en eliminar m�ximo con HeapMAX: " + duration + " milisegundos");
-				//				}
-				//				else
-				//				{
-				//					view.printMessage("Muestra invalida");
-				//				}
-				//				break;
-				//			case 7:
-				//				view.printMessage("Ingrese la fecha con hora inicial (Ej : 2018-01-02T20:02:22.000Z)");
-				//				LocalDateTime fechaInicial = convertirFecha_Hora_LDT(sc.next());
-				//
-				//				view.printMessage("Ingrese la fecha con hora final (Ej : 2018-03-02T20:02:22.000Z)");
-				//				LocalDateTime fechaFinal = convertirFecha_Hora_LDT(sc.next());
-				//				view.printMessage("Ingrese la cantidad de vias que quiere ver: ");
-				//				int num=sc.nextInt();
-				//				startTime = System.currentTimeMillis();
-				//				view.printElementos( num, this.crearMaxColaP(fechaInicial, fechaFinal));
-				//				endTime = System.currentTimeMillis();
-				//				duration = endTime - startTime;
-				//				view.printMessage("Tiempo con Cola de Prioridad: " + duration + " milisegundos");
-				//
-				//				break;
-				//			case 8:
-				//				view.printMessage("Ingrese la fecha con hora inicial (Ej : 2018-01-02T20:02:22.000Z");
-				//				LocalDateTime fechaInicial2 = convertirFecha_Hora_LDT(sc.next());
-				//
-				//				view.printMessage("Ingrese la fecha con hora final (Ej : 2018-03-02T20:02:22.000Z");
-				//				LocalDateTime fechaFinal2 = convertirFecha_Hora_LDT(sc.next());
-				//				view.printMessage("Ingrese la cantidad de vias que quiere ver: ");
-				//				int num2=sc.nextInt();
-				//				startTime = System.currentTimeMillis();
-				//				view.printElementos2( num2, this.crearMaxHeapCP(fechaInicial2, fechaFinal2));
-				//				endTime = System.currentTimeMillis();
-				//				duration = endTime - startTime;
-				//				view.printMessage("Tiempo con Heap: " + duration + " milisegundos");
-				//				break;
-			case 9:	
+			case 1:
+				
+				break;
+			case 2: 
+				
+				break;
+			
+			case 3:	
 				fin=true;
 				sc.close();
 				break;
@@ -208,13 +96,15 @@ public class Controller {
 		String street=null;
 		int x=0;
 		int y=0;
+		int cont = 0;
+		int contGlobal = 0;
 		JsonParser parser = new JsonParser();
 		try{
 			JsonArray ja = (JsonArray) parser.parse(new FileReader(rutaEnero));
 			for(int i = 0; ja != null && i<ja.size(); i++){
 				JsonObject actual = (JsonObject) ja.get(i);
 				if(actual.get("OBJECTID") != null){
-					obID = actual.get("OBJECTID").getAsInt();			
+					obID = actual.get("OBJECTID").getAsInt();
 				}
 				if(actual.get("LOCATION") != null){
 					loc = actual.get("LOCATION").getAsString();
@@ -247,10 +137,13 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arreglo.agregar(new VOMovingViolations(obID, date, addID, loc, street, x,y));
-
+					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					cont++;
+					contGlobal++;
 				}
 			}
+			System.out.println("Datos Enero: " + cont);
+			cont = 0;
 			JsonArray ja1 = (JsonArray) parser.parse(new FileReader(rutaFebrero));
 			for(int i = 0; ja1 != null && i<ja1.size(); i++){
 				JsonObject actual = (JsonObject) ja1.get(i);
@@ -288,11 +181,14 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arreglo.agregar(new VOMovingViolations(obID, date, addID, loc, street, x,y));
-
-
+					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					cont++;
+					contGlobal++;
 				}
 			}
+			System.out.println("Datos Febrero: " + cont);
+			cont = 0;
+			
 			JsonArray ja2 = (JsonArray) parser.parse(new FileReader(rutaMarzo));
 			for(int i = 0; ja2 != null && i<ja2.size(); i++){
 				JsonObject actual = (JsonObject) ja2.get(i);
@@ -330,9 +226,15 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arreglo.agregar(new VOMovingViolations(obID, date, addID, loc, street, x,y));
+					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					cont++;
+					contGlobal++;
 				}
 			}
+			
+			System.out.println("Datos Marzo: " + cont);
+			cont = 0;
+			
 			JsonArray ja3 = (JsonArray) parser.parse(new FileReader(rutaAbril));
 			for(int i = 0; ja3 != null && i<ja3.size(); i++){
 				JsonObject actual = (JsonObject) ja3.get(i);
@@ -370,11 +272,15 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arreglo.agregar(new VOMovingViolations(obID, date, addID, loc, street, x,y));
-
-
-				}
+					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					cont++;
+					contGlobal++;
+				}		
 			}
+			
+			System.out.println("Datos Abril: " + cont);
+			cont = 0;
+			
 			JsonArray ja4 = (JsonArray) parser.parse(new FileReader(rutaMayo));
 			for(int i = 0; ja4 != null && i<ja4.size(); i++){
 				JsonObject actual = (JsonObject) ja4.get(i);
@@ -412,11 +318,13 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arreglo.agregar(new VOMovingViolations(obID, date, addID, loc, street, x,y));
-
-
+					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					cont++;
+					contGlobal++;
 				}
 			}
+			System.out.println("Datos Mayo: " + cont);
+			cont = 0;
 			JsonArray ja5 = (JsonArray) parser.parse(new FileReader(rutaJunio));
 			for(int i = 0; ja5 != null && i<ja5.size(); i++){
 				JsonObject actual = (JsonObject) ja5.get(i);
@@ -454,15 +362,17 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arreglo.agregar(new VOMovingViolations(obID, date, addID, loc, street, x,y));
-
+					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					cont++;
+					contGlobal++;
 				}
 			}
+			System.out.println("Datos Junio: " + cont);
 		}
 		catch(IOException e){
 			e.getMessage();
 		}
-		return arreglo.darTamano();
+		return contGlobal;
 	}
 
 	/**
@@ -490,17 +400,6 @@ public class Controller {
 	public LocalTime darHora(String fecha){
 		return convertirFecha_Hora_LDT(fecha).toLocalTime();
 	}
-	public Comparable<VOMovingViolations>[] pasarDinamicoArreglo()
-	{
-		Comparable<VOMovingViolations>[] temp = new Comparable[arreglo.darTamano()];	
-
-		int pos=0;
-		while(pos<arreglo.darTamano())
-		{
-			temp[pos] = arreglo.darElem(pos);
-			pos++;
-		}
-		return temp;
-	}
+	
 
 }
