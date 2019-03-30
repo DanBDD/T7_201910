@@ -10,15 +10,15 @@ import java.util.Date;
 /**
  * Representation of a Trip object
  */
-public class VOMovingViolations implements Comparable<VOMovingViolations>{
+public class VOMovingViolations {
 
 	private int addressID;
 	
 	private String streetSegId;
 	
-	private int xCoord;
+	private double xCoord;
 	
-	private int yCoord;
+	private double yCoord;
 
 	private String ticketIssueDate;
 
@@ -32,7 +32,7 @@ public class VOMovingViolations implements Comparable<VOMovingViolations>{
 	 * @param pAddress direccion de la infracciï¿½n
 
 	 */
-	public VOMovingViolations(String pIssueDate, int pAddress, String pLocation, String streetId, int x, int y){
+	public VOMovingViolations(String pIssueDate, int pAddress, String pLocation, String streetId, double x, double y){
 		location = pLocation;
 		addressID = pAddress;
 		ticketIssueDate = pIssueDate;
@@ -56,30 +56,18 @@ public class VOMovingViolations implements Comparable<VOMovingViolations>{
 	{
 		return streetSegId;
 	}
-	public int darxCoor()
+	public double darxCoor()
 	{
 		return xCoord;
 	}
-	public int daryCoord()
+	public double daryCoord()
 	{
 		return yCoord;
 	}
-	private static LocalDateTime convertirFecha_Hora_LDT(String fechaHora)
-	{
-		return LocalDateTime.parse(fechaHora, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'.000Z'"));
+	
+	public String toString() {
+		return "Datos de la infracción: Localización: " + location + " AddressID " + addressID + " StreetSegID " 
+	+ streetSegId + " XCoord " + xCoord + " YCoord " + yCoord  + " TicketIssueDate " + ticketIssueDate ;
+		
 	}
-
-	public LocalDateTime darFechaLocalDateTime(){
-		return convertirFecha_Hora_LDT(ticketIssueDate);
-	}
-
-
-	@Override
-	public int compareTo(VOMovingViolations o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-
 }

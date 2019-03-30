@@ -98,19 +98,18 @@ public class TestRedBlackBST extends TestCase{
 		}
 		//valuesInRange
 		int [] nums3={6,2,1,7,4,0};
-		Iterable<Integer>  c3=st.values("C","R");
-		Iterator<Integer> i3=c3.iterator();
 		int pos3=0;
-		while(i3.hasNext())
-		{
-			int n = i3.next();
-			if(nums3[pos3]==n)
-			{
+		ArregloDinamico<Integer> ar = st.values("C", "R");
+		for (int a = 0;a<ar.darTamano();a++) {
+			int n = ar.darElem(a);
+			if(nums3[pos3] == n) {
 				pos3++;
 			}
-			else
+			else {
 				fail();
+			}
 		}
+
 	}
 }
 

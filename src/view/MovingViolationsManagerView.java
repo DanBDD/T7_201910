@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import controller.Controller;
+import model.data_structures.ArregloDinamico;
 import model.data_structures.IQueue;
 import model.vo.VOMovingViolations;
 
@@ -18,7 +19,7 @@ public class MovingViolationsManagerView
 	public void printMenu() {
 		System.out.println("---------ISIS 1206 - Estructuras de datos----------");
 		System.out.println("---------------------Taller 7----------------------");
-		System.out.println("0. Cargar datos del cuatrimestre");
+		System.out.println("0. Cargar datos del semestre");
 		System.out.println("1. Ver información de Object ID");
 		System.out.println("2. Ver información de Object ID por rango");
 		System.out.println("3. Salir");
@@ -27,5 +28,11 @@ public class MovingViolationsManagerView
 	}
 	public void printMessage(String mensaje) {
 		System.out.println(mensaje);
+	}
+	public void printRes2(ArregloDinamico<VOMovingViolations> lista) {
+		for(int i = 0; i < lista.darTamano();i++) {
+			VOMovingViolations actual = lista.darElem(i);
+			System.out.println(actual.toString());
+		}
 	}
 }

@@ -13,6 +13,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import model.data_structures.ArregloDinamico;
+import model.data_structures.Cola;
 import model.data_structures.Comparaciones;
 import model.data_structures.RedBlackBST;
 import model.util.Sort;
@@ -74,12 +77,22 @@ public class Controller {
 				view.printMessage("Datos cargados, total de datos: " + nDatos);
 				break;
 			case 1:
-				
+				System.out.println("Introduzca el ObjectID a buscar.");
+				int id = sc.nextInt();
+				ObjectID busqueda = new ObjectID(id);
+				VOMovingViolations objRetorno = arbol.get(busqueda);
+				System.out.println(objRetorno.toString());
 				break;
 			case 2: 
-				
+				System.out.println("Introduzca el rango inferior de ObjectID a buscar.");
+				int inferior = sc.nextInt();
+				System.out.println("Introduzca el rango superior de ObjectID a buscar.");
+				int superior = sc.nextInt();
+				ObjectID limInf = new ObjectID(inferior);
+				ObjectID limSup = new ObjectID(superior);
+				ArregloDinamico<VOMovingViolations> res = arbol.values(limInf, limSup);
+				view.printRes2(res);
 				break;
-			
 			case 3:	
 				fin=true;
 				sc.close();
@@ -94,10 +107,9 @@ public class Controller {
 		String date=null;
 		String address = null;
 		String street=null;
-		int x=0;
-		int y=0;
+		double x=0;
+		double y=0;
 		int cont = 0;
-		int contGlobal = 0;
 		JsonParser parser = new JsonParser();
 		try{
 			JsonArray ja = (JsonArray) parser.parse(new FileReader(rutaEnero));
@@ -130,16 +142,15 @@ public class Controller {
 					}
 				}
 				if(actual.get("XCOORD") != null){
-					x= actual.get("XCOORD").getAsInt();	
+					x= actual.get("XCOORD").getAsDouble();	
 				}
 				if(actual.get("YCOORD") != null){
-					y = actual.get("YCOORD").getAsInt();
+					y = actual.get("YCOORD").getAsDouble();
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
 					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
 					cont++;
-					contGlobal++;
 				}
 			}
 			System.out.println("Datos Enero: " + cont);
@@ -174,16 +185,16 @@ public class Controller {
 					}
 				}
 				if(actual.get("XCOORD") != null){
-					x= actual.get("XCOORD").getAsInt();	
+					x= actual.get("XCOORD").getAsDouble();	
 				}
 				if(actual.get("YCOORD") != null){
-					y = actual.get("YCOORD").getAsInt();
+					y = actual.get("YCOORD").getAsDouble();
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
 					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
 					cont++;
-					contGlobal++;
+					
 				}
 			}
 			System.out.println("Datos Febrero: " + cont);
@@ -219,16 +230,16 @@ public class Controller {
 					}
 				}
 				if(actual.get("XCOORD") != null){
-					x= actual.get("XCOORD").getAsInt();	
+					x= actual.get("XCOORD").getAsDouble();	
 				}
 				if(actual.get("YCOORD") != null){
-					y = actual.get("YCOORD").getAsInt();
+					y = actual.get("YCOORD").getAsDouble();
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
 					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
 					cont++;
-					contGlobal++;
+					
 				}
 			}
 			
@@ -265,16 +276,16 @@ public class Controller {
 					}
 				}
 				if(actual.get("XCOORD") != null){
-					x= actual.get("XCOORD").getAsInt();	
+					x= actual.get("XCOORD").getAsDouble();	
 				}
 				if(actual.get("YCOORD") != null){
-					y = actual.get("YCOORD").getAsInt();
+					y = actual.get("YCOORD").getAsDouble();
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
 					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
 					cont++;
-					contGlobal++;
+					
 				}		
 			}
 			
@@ -311,16 +322,16 @@ public class Controller {
 					}
 				}
 				if(actual.get("XCOORD") != null){
-					x= actual.get("XCOORD").getAsInt();	
+					x= actual.get("XCOORD").getAsDouble();	
 				}
 				if(actual.get("YCOORD") != null){
-					y = actual.get("YCOORD").getAsInt();
+					y = actual.get("YCOORD").getAsDouble();
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
 					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
 					cont++;
-					contGlobal++;
+					
 				}
 			}
 			System.out.println("Datos Mayo: " + cont);
@@ -355,16 +366,16 @@ public class Controller {
 					}
 				}
 				if(actual.get("XCOORD") != null){
-					x= actual.get("XCOORD").getAsInt();	
+					x= actual.get("XCOORD").getAsDouble();	
 				}
 				if(actual.get("YCOORD") != null){
-					y = actual.get("YCOORD").getAsInt();
+					y = actual.get("YCOORD").getAsDouble();
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
 					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
 					cont++;
-					contGlobal++;
+					
 				}
 			}
 			System.out.println("Datos Junio: " + cont);
@@ -372,7 +383,7 @@ public class Controller {
 		catch(IOException e){
 			e.getMessage();
 		}
-		return contGlobal;
+		return arbol.size();
 	}
 
 	/**

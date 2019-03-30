@@ -629,11 +629,11 @@ public class RedBlackBST<K extends Comparable<K>, V> {
      * @throws IllegalArgumentException if either {@code lo} or {@code hi}
      *    is {@code null}
      */
-    public Iterable<V> values(K lo, K hi) {
+    public ArregloDinamico<V> values(K lo, K hi) {
         if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
         if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
-
-        ArrayList<V> queue = new ArrayList<V>();
+        ArregloDinamico<V> queue = new ArregloDinamico<>(10000);
+//        ArrayList<V> queue = new ArrayList<V>();
         // if (isEmpty() || lo.compareTo(hi) > 0) return queue;
         values(root, queue, lo, hi);
         return queue;
@@ -641,12 +641,12 @@ public class RedBlackBST<K extends Comparable<K>, V> {
 
     // add the keys between lo and hi in the subtree rooted at x
     // to the queue
-    private void values(Node x, ArrayList<V> queue, K lo, K hi) { 
+    private void values(Node x, ArregloDinamico<V> queue, K lo, K hi) { 
         if (x == null) return; 
         int cmplo = lo.compareTo(x.key); 
         int cmphi = hi.compareTo(x.key); 
         if (cmplo < 0) values(x.left, queue, lo, hi); 
-        if (cmplo <= 0 && cmphi >= 0) queue.add(x.val); 
+        if (cmplo <= 0 && cmphi >= 0) queue.agregar(x.val); 
         if (cmphi > 0) values(x.right, queue, lo, hi); 
     } 
     /**
