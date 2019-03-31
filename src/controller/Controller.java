@@ -75,6 +75,7 @@ public class Controller {
 			case 0:
 				nDatos = this.loadMovingViolations();
 				view.printMessage("Datos cargados, total de datos: " + nDatos);
+				
 				break;
 			case 1:
 				System.out.println("Introduzca el ObjectID a buscar.");
@@ -97,6 +98,9 @@ public class Controller {
 				fin=true;
 				sc.close();
 				break;
+			case 4:
+				double resr = prom();
+				System.out.println("Promedio " + resr);
 			}
 		}
 	}
@@ -149,7 +153,7 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					arbol.put(new ObjectID(obID), new VOMovingViolations(obID,date, addID, loc, street, x, y));
 					cont++;
 				}
 			}
@@ -192,7 +196,7 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					arbol.put(new ObjectID(obID), new VOMovingViolations(obID, date, addID, loc, street, x, y));
 					cont++;
 					
 				}
@@ -237,7 +241,7 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					arbol.put(new ObjectID(obID), new VOMovingViolations(obID,date, addID, loc, street, x, y));
 					cont++;
 					
 				}
@@ -283,7 +287,7 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					arbol.put(new ObjectID(obID), new VOMovingViolations(obID, date, addID, loc, street, x, y));
 					cont++;
 					
 				}		
@@ -329,7 +333,7 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					arbol.put(new ObjectID(obID), new VOMovingViolations(obID,date, addID, loc, street, x, y));
 					cont++;
 					
 				}
@@ -373,7 +377,7 @@ public class Controller {
 				}
 
 				if(obID != 0 && loc != null && addID != -1 && date !=null && street != null && x!=-1 && y!=-1){
-					arbol.put(new ObjectID(obID), new VOMovingViolations(date, addID, loc, street, x, y));
+					arbol.put(new ObjectID(obID), new VOMovingViolations(obID, date, addID, loc, street, x, y));
 					cont++;
 					
 				}
@@ -410,6 +414,20 @@ public class Controller {
 
 	public LocalTime darHora(String fecha){
 		return convertirFecha_Hora_LDT(fecha).toLocalTime();
+	}
+	
+	public double prom(){
+		double res = 0;
+		int suma = 0;
+		ArregloDinamico<VOMovingViolations> rest = arbol.values(arbol.min(), arbol.max());
+		System.out.println(arbol.size());
+		for(int i = 0; i<300;i++) {
+			VOMovingViolations actual = rest.darElem(i);
+			suma += arbol.altura(new ObjectID(actual.darID()));
+			
+		}
+		res = suma/arbol.size();
+		return res;
 	}
 	
 

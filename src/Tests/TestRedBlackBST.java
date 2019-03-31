@@ -50,7 +50,7 @@ public class TestRedBlackBST extends TestCase{
 		assertEquals((int)st.get("A"), 5);
 		assertEquals((int)st.get("T"), 10);
 		//getHeight
-		RedBlackBST<String, Integer>.Node nodo=st. new Node("R", 0, st.BLACK, 3);
+		RedBlackBST<String, Integer>.Node nodo=st.new Node("R", 0, st.BLACK, 3);
 		assertEquals(st.getHeight(nodo), 0);
 		//height
 		assertEquals(st.height(), 3);

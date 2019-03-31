@@ -421,7 +421,16 @@ public class RedBlackBST<K extends Comparable<K>, V> {
         if (x == null) return -1;
         return 1 + Math.max(getHeight(x.left), getHeight(x.right));
     }
-
+    public int altura(K pllave) {
+    	return darAltura(pllave,1, root);
+    }
+    public int darAltura(K llave,int num, Node root ) {
+    	if (root == null) return 0;
+    	if((root.key.compareTo(llave)) == 0) return num;
+    	int aux = darAltura(llave, num, root.left);
+    	if(aux != 0) return aux;
+    	return darAltura(llave, num, root.right);
+    }
    /***************************************************************************
     *  Ordered symbol table methods.
     ***************************************************************************/
@@ -613,8 +622,8 @@ public class RedBlackBST<K extends Comparable<K>, V> {
      * use the foreach notation: {@code for (Key key : st.keys())}.
      * @return all keys in the symbol table as an {@code Iterable}
      */
-    public Iterable<V> values() {
-        if (isEmpty()) return new ArrayList<V>();
+    public ArregloDinamico<V> values() {
+        if (isEmpty()) return new ArregloDinamico<V>(0);
         return values(min(), max());
     }
 

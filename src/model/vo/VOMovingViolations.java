@@ -24,7 +24,7 @@ public class VOMovingViolations {
 
 	private String location;
 
-	
+	private int objectID;
 	/**
 	 * Constructor VOMovingViolations
 	 * @param pLocation localizacion de la infraccion
@@ -32,7 +32,8 @@ public class VOMovingViolations {
 	 * @param pAddress direccion de la infracciï¿½n
 
 	 */
-	public VOMovingViolations(String pIssueDate, int pAddress, String pLocation, String streetId, double x, double y){
+	public VOMovingViolations(int pID,String pIssueDate, int pAddress, String pLocation, String streetId, double x, double y){
+		objectID = pID;
 		location = pLocation;
 		addressID = pAddress;
 		ticketIssueDate = pIssueDate;
@@ -64,7 +65,9 @@ public class VOMovingViolations {
 	{
 		return yCoord;
 	}
-	
+	public int darID() {
+		return objectID;
+	}
 	public String toString() {
 		return "Datos de la infracción: Localización: " + location + " AddressID " + addressID + " StreetSegID " 
 	+ streetSegId + " XCoord " + xCoord + " YCoord " + yCoord  + " TicketIssueDate " + ticketIssueDate ;
