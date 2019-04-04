@@ -390,44 +390,17 @@ public class Controller {
 		return arbol.size();
 	}
 
-	/**
-	 * Convertir fecha a un objeto LocalDate
-	 * @param fecha fecha en formato dd/mm/aaaa con dd para dia, mm para mes y aaaa para agno
-	 * @return objeto LD con fecha
-	 */
-	private static LocalDate convertirFecha(String fecha)
-	{
-		return LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-	}
-
-
-	/**
-	 * Convertir fecha y hora a un objeto LocalDateTime
-	 * @param fecha fecha en formato dd/mm/aaaaTHH:mm:ss con dd para dia, mm para mes y aaaa para agno, HH para hora, mm para minutos y ss para segundos
-	 * @return objeto LDT con fecha y hora integrados
-	 */
-	private static LocalDateTime convertirFecha_Hora_LDT(String fechaHora)
-	{
-		return LocalDateTime.parse(fechaHora, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'.000Z'"));
-	}
-
-
-	public LocalTime darHora(String fecha){
-		return convertirFecha_Hora_LDT(fecha).toLocalTime();
-	}
-	
 	public double prom(){
-		double res = 0;
-		int suma = 0;
-		ArregloDinamico<VOMovingViolations> rest = arbol.values(arbol.min(), arbol.max());
-		System.out.println(arbol.size());
-		for(int i = 0; i<300;i++) {
-			VOMovingViolations actual = rest.darElem(i);
-			suma += arbol.altura(new ObjectID(actual.darID()));
-			
+		double prom = 0.0;
+		int sum = 0;
+		ArregloDinamico<VOMovingViolations> arr = arbol.values(arbol.min(), arbol.max());
+		for(int i = 0; i < arr.darTamano(); i++){
+			VOMovingViolations actual = arr.darElem(i);
+			ObjectID llaveParam = new ObjectID(actual.darID());
+			sum+=arbol.darAlt(llaveParam);
 		}
-		res = suma/arbol.size();
-		return res;
+		prom= (double)sum/arr.darTamano();
+		return prom;
 	}
 	
 
