@@ -1,7 +1,7 @@
 a) Total de nodos (infracciones): 599207
 b) Altura real del árbol: 26
-c) Altura promedio para buscar infracción: 
-d) Altura teórica del árbol Red_Black más alto que se podría construir con el mismo número de infracciones: 
-e) Altura teórica del árbol Red_Black más bajo que se podría construir con el mismo número de infracciones: 
-f) Altura teórica del árbol 2-3 más alto que se podría construir con el mismo número de infracciones: 
-g) Altura teórica del árbol 2-3 más bajo que se podría construir con el mismo número de infracciones: 
+c) Altura promedio para buscar infracción: Aproximadamente 18 (17,5)
+d) Altura teórica del árbol Red_Black más alto que se podría construir con el mismo número de infracciones: Aproximadamente 12 (11,5)
+e) Altura teórica del árbol Red_Black más bajo que se podría construir con el mismo número de infracciones: Aproximadamente 6 (5,7)
+f) Altura teórica del árbol 2-3 más alto que se podría construir con el mismo número de infracciones: Aproximadamente 20 (19,1)
+g) Altura teórica del árbol 2-3 más bajo que se podría construir con el mismo número de infracciones: Aproximadamente 13 (12,1)

@@ -100,7 +100,7 @@ public class Controller {
 				break;
 			case 4:
 				double resr = prom();
-				System.out.println("Promedio " + resr);
+				System.out.println("Promedio: " + resr);
 			}
 		}
 	}

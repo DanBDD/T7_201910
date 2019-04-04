@@ -29,7 +29,7 @@ import java.util.ArrayList;
  *
  ******************************************************************************/
 import java.util.NoSuchElementException;
-//CÓDIGO TOMADO DEL LIBRO Algorithms 4th Edition de Sedgewick y Wayne
+//Cï¿½DIGO TOMADO DEL LIBRO Algorithms 4th Edition de Sedgewick y Wayne
 /**
  *  The {@code BST} class represents an ordered symbol table of generic
  *  key-value pairs.
@@ -667,8 +667,6 @@ public class RedBlackBST<K extends Comparable<K>, V> {
 		if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
 		if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
 		ArregloDinamico<V> queue = new ArregloDinamico<>(10000);
-		//        ArrayList<V> queue = new ArrayList<V>();
-		// if (isEmpty() || lo.compareTo(hi) > 0) return queue;
 		values(root, queue, lo, hi);
 		return queue;
 	} 

@@ -69,8 +69,8 @@ public class VOMovingViolations {
 		return objectID;
 	}
 	public String toString() {
-		return "Datos de la infracción: Localización: " + location + " AddressID " + addressID + " StreetSegID " 
-	+ streetSegId + " XCoord " + xCoord + " YCoord " + yCoord  + " TicketIssueDate " + ticketIssueDate ;
+		return "Datos de la infracciï¿½n: Localizaciï¿½n: " + location + " AddressID: " + addressID + " StreetSegID: " 
+	+ streetSegId + " XCoord: " + xCoord + " YCoord: " + yCoord  + " TicketIssueDate: " + ticketIssueDate ;
 		
 	}
 }
